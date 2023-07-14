@@ -1,5 +1,44 @@
 .App {
+  display: flex;
+  justify-content: left;
+  color: white;
+}
+
+.profile-section {
+  margin: 0 1rem;
+  margin-top: 2rem;
+  width: 20%;
   text-align: center;
+}
+.card-section {
+  margin: 0 1rem;
+  margin-top: 2rem;
+  width: 80%;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  grid-gap: 1rem;
+}
+@media screen and (max-width: 1440px) {
+  .card-section {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+  }
+}
+@media screen and (max-width: 800px) {
+  .card-section {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .card-section {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: auto;
+  }
+  
 }
 
 .App-logo {

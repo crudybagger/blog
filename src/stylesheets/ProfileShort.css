@@ -1,0 +1,9 @@
+
+#profile-pic {
+    width: 150px;
+    border-radius: 50%;
+    /* border: 1px solid #000138; */
+    /* box-shadow: #000138 0px 0px 0px 1px; */
+    background-color: #000000;
+    background-size: cover;
+}
