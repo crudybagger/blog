@@ -1,20 +1,31 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import '../stylesheets/NavBar.css'
 function NavBar({currentPath, setCurrentPath}) {
+  const reducePath = (index) => {
+    const newPath = currentPath.slice(0, index);
+    setCurrentPath(newPath); 
+  }
+
   return (
     <div className='navbar'>
-        <button className='back_button' onClick={()=>{
-          // console.log(currentPath);
-          // currentPath.pop();
-          // console.log(currentPath);
-          // setCurrentPath(currentPath);
-          setCurrentPath();
+        { 
+        currentPath.length > 1 ?
+          <button className='back_button' onClick={()=>{
+          reducePath(-1);
         }}>
-            Go Back
+            <FontAwesomeIcon icon={faArrowLeft} />
         </button>
-        <p className='nav_path'>
-            {currentPath ? currentPath.map(place => <button>{place}&gt;</button>) : 'Select a project'}
-        </p>
+        : ""
+        }
+        <div className='nav_path'>
+        {currentPath.map((place, index) => (
+        <span key={index} onClick={() => reducePath(index + 1)}>
+          {place} 
+        </span>
+        ))}
+        </div>
     </div>
   )
 }
