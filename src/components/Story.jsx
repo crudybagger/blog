@@ -8,7 +8,7 @@ const story = {
     tags: ['tag1', 'tag2']
 }
 
-function Story(story) {
+function Story({story}) {
   return (
     <div>
         <h1>{story.title}</h1>

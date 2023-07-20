@@ -3,18 +3,26 @@ import ProfileShort from './components/ProfileShort';
 import List from './components/List';
 import './App.css';
 import NavBar from './components/NavBar';
+import Story from './components/Story';
+import { useStory, useStoryUpdate } from './Context/StoryContext';
 import { getProjects, getStories } from './api/Projects'
 
 
 function App() {
   const projects = getProjects();
   const [currentPath, setCurrentPath] = useState(["Home"]);
-  
-  const extendPath = (path) => {
-    setCurrentPath([...currentPath, path]);
+  const selectedStory = useStory();
+  const updateStory = useStoryUpdate();
+
+  const extendPath = (item) => {
+    setCurrentPath([...currentPath, item.title]);
   }
-  // get stories based on last element in currentPath
+  const selectStory = (story) => {
+    updateStory(story);
+    setCurrentPath([...currentPath, story.title]);
+  }
   const currentStories = getStories(currentPath[currentPath.length - 1]);
+
   return (
     <>
     <NavBar currentPath={currentPath} setCurrentPath={setCurrentPath} />
@@ -25,12 +33,15 @@ function App() {
       </div>
 
       <div className='card-section'>
-        { 
+        {
+        selectedStory ?
+        <Story story={selectedStory} />
+        :
         currentPath.length === 1 ?
           <List itemList={projects} extendPath={extendPath}/>
         :
         currentStories.length > 0 ? 
-          <List itemList={currentStories} extendPath={extendPath}/>
+          <List itemList={currentStories} extendPath={selectStory}/>
         :
         <div className='no-stories'>
           <h1>No stories found</h1>
