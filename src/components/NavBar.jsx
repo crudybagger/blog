@@ -10,7 +10,7 @@ function NavBar({currentPath, setCurrentPath}) {
   const reducePath = (index) => {
     const newPath = currentPath.slice(0, index);
     setCurrentPath(newPath);
-    updateStory(null);
+    if(index < currentPath.length) updateStory(null);
   }
 
   useEffect(()=>{
